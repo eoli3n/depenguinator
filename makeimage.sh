@@ -85,10 +85,8 @@ done
 ( cd mfs && bsdtar -czf usr.tgz usr)
 rm -r mfs/usr && mkdir mfs/usr
 
-# Build makefs
-bsdtar -xzf makefs-20080113.tar.gz
-( cd makefs-20080113 && sh -e build.sh )
-MAKEFS=makefs-20080113/netbsdsrc/tools/makefs/makefs
+# Use system makefs
+MAKEFS=/usr/sbin/makefs
 
 # Collect together the bits which go into the root disk
 mkdir disk && chown 0:0 disk
