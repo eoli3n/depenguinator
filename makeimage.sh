@@ -35,8 +35,8 @@ fi
 
 # Extract bits from the release
 mkdir mfs && chown 0:0 mfs
-tar --unlink -xpJf dist/base.txz -C mfs
-tar --unlink -xpJf dist/kernel.txz -C mfs
+bsdtar --unlink -xpJf dist/base.txz -C mfs
+bsdtar --unlink -xpJf dist/kernel.txz -C mfs
 
 #Remove debugging symbols to save space
 rm -f mfs/boot/kernel/*.symbols
@@ -82,11 +82,11 @@ for interface in ${depenguinator_interfaces}; do
 done
 
 # Package up /usr into usr.tgz
-( cd mfs && tar -czf usr.tgz usr)
+( cd mfs && bsdtar -czf usr.tgz usr)
 rm -r mfs/usr && mkdir mfs/usr
 
 # Build makefs
-tar -xzf makefs-20080113.tar.gz
+bsdtar -xzf makefs-20080113.tar.gz
 ( cd makefs-20080113 && sh -e build.sh )
 MAKEFS=makefs-20080113/netbsdsrc/tools/makefs/makefs
 
